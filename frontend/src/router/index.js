@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import MessageView from '../views/MessageView.vue'
 import EmailView from '../views/template/EmailView.vue'
 
 const router = createRouter({
@@ -7,14 +8,16 @@ const router = createRouter({
   routes: [
     {
       path: '/email',
-      name: 'email',
       component: EmailView,
       children: [
         {
-          path: '/home',
-          name: 'home',
+          path: '',
           component: HomeView
-        }
+        },
+        {
+          path: 'message',
+          component: MessageView
+         }
       ]
     },
    

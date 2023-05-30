@@ -65,7 +65,7 @@
       <!--right side menu-->
       <div id="SideMenu" class="w-[300px]">
         <div
-        @click="newMessageOpen = !newMessageOpen"
+          @click="newMessageOpen = !newMessageOpen"
           class="flex items-center justify-center bg-sky-200 w-36 h-8 mt-2 ml-2 p-7 cursor-pointer rounded-2xl"
         >
           <PencilOutlineIcon :size="25" class="mr-4" />
@@ -74,15 +74,17 @@
 
         <div class="my-5"></div>
 
-        <div
-          class="flex w-[250px] justify-between px-6 py-1.5 bg-blue-100 rounded-r-full"
-        >
-          <div class="flex items-center">
-            <InboxIcon :size="17" />
-            <div class="text-sm pl-4 font-semibold">Inbox</div>
+        <RouterLink to="/email">
+          <div
+            class="flex w-[250px] justify-between px-6 py-1.5 bg-blue-100 rounded-r-full"
+          >
+            <div class="flex items-center">
+              <InboxIcon :size="17" />
+              <div class="text-sm pl-4 font-semibold">Inbox</div>
+            </div>
+            <div class="text-xs justify-end font-semibold">26</div>
           </div>
-          <div class="text-xs justify-end font-semibold">26</div>
-        </div>
+        </RouterLink>
 
         <div class="flex w-[250px] justify-between px-6 py-1.5">
           <div class="flex items-center">
@@ -114,7 +116,7 @@
       </div>
 
       <!-- this is where the page changes -->
-      <router-view />
+      <RouterView />
       <!-- this is where the page changes -->
 
       <!-- left side bar -->
@@ -161,14 +163,18 @@
 
     <!-- new message popup box -->
     <div
-    v-if="newMessageOpen"
+      v-if="newMessageOpen"
       class="w-[560px] h-[570px] absolute bottom-0 right-0 mr-20 rounded-t-lg shadow-2xl bg-white"
     >
       <div
         class="flex items center justify-between rounded-t-lg w-full text-sm px-3.5 py-2.5 bg-gray-200"
       >
         <h4>New Message</h4>
-        <CloseIcon @click="() => newMessageOpen = false" class="cursor-pointer flex items-center justify-center hover:bg-gray-300 w-7 h-7 rounded-full" :size="19" />
+        <CloseIcon
+          @click="() => (newMessageOpen = false)"
+          class="cursor-pointer flex items-center justify-center hover:bg-gray-300 w-7 h-7 rounded-full"
+          :size="19"
+        />
       </div>
 
       <div class="relative flex items-center px-3.5 py-2">
@@ -201,17 +207,17 @@
       <div class="px-3 pb-4">
         <button
           class="bg-blue-700 hover:bg-blue-600 text-white text-sm font-bold py-2 px-4 rounded-full"
-        >Send message</button>
+        >
+          Send message
+        </button>
       </div>
-
     </div>
-
-
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import { RouterView } from "vue-router";
 
 import IconComponent from "../../components/IconComponent.vue";
 import UserComponent from "../../components/UserComponent.vue";
@@ -225,7 +231,5 @@ import FileOutlineIcon from "vue-material-design-icons/FileOutline.vue";
 import PlusIcon from "vue-material-design-icons/Plus.vue";
 import CloseIcon from "vue-material-design-icons/Close.vue";
 
-
 let newMessageOpen = ref(false);
-
 </script>

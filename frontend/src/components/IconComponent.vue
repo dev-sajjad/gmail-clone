@@ -4,6 +4,7 @@
       class="flex items-center justify-center rounded-full cursor-pointer w-10 h-10"
       :class="[hoverColor]"
       :data-tooltip-target="`tooltip-no-arrow-${iconString}`"
+      data-tooltip-placement="bottom" 
     >
       <component :is="icon" :size="iconSize" :fillColor="iconColor"/>
     </div>
@@ -37,7 +38,7 @@ const props = defineProps({
   text: String,
 });
 
-const { iconString, iconColor } = toRefs(props);
+const { iconString } = toRefs(props);
 
 let icon = null;
 
