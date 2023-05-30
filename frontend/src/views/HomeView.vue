@@ -15,48 +15,14 @@
     </div>
 
     <!-- message rows -->
-    <div>
+    <div v-for="email in userStore.emails" :key="email.id" >
       <MessageRow
-        from="john.doe@gmail.com"
-        subject="Test row 1 is not enough for today"
-        body="This is the body text of the test row 1"
-        time="May 29 9:11 pm"
-      />
-      <MessageRow
-        from="john.doe@gmail.com"
-        subject="Test row 1 is not enough for today"
-        body="This is the body text of the test row 1"
-        time="May 29 9:11 pm"
-      />
-      <MessageRow
-        from="john.doe@gmail.com"
-        subject="Test row 1 is not enough for today"
-        body="This is the body text of the test row 1"
-        time="May 29 9:11 pm"
-      />
-      <MessageRow
-        from="john.doe@gmail.com"
-        subject="Test row 1 is not enough for today"
-        body="This is the body text of the test row 1"
-        time="May 29 9:11 pm"
-      />
-      <MessageRow
-        from="john.doe@gmail.com"
-        subject="Test row 1 is not enough for today"
-        body="This is the body text of the test row 1"
-        time="May 29 9:11 pm"
-      />
-      <MessageRow
-        from="john.doe@gmail.com"
-        subject="Test row 1 is not enough for today"
-        body="This is the body text of the test row 1"
-        time="May 29 9:11 pm"
-      />
-      <MessageRow
-        from="john.doe@gmail.com"
-        subject="Test row 1 is not enough for today"
-        body="This is the body text of the test row 1"
-        time="May 29 9:11 pm"
+        :id="email.id"
+        :from="email.fromEmail"
+        :subject="email.subject"
+        :body="email.body"
+        :time="email.createdAt"
+        :hasViewed="email.hasViewed"
       />
     </div>
 
@@ -65,7 +31,17 @@
 
 
 <script setup>
+import { onMounted } from 'vue';
+
 import IconComponent from '../components/IconComponent.vue';
 import MessageRow from '../components/MessageRow.vue';
+import { useUserStore } from '../stores/user-store';
+
+const userStore = useUserStore();
+
+onMounted(() => {
+  userStore.getEmailByEmailAddress()
+})
+
 </script>
 
