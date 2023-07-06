@@ -1,5 +1,5 @@
 <template>
-  <div id="IconComponent">
+  <div id="IconComponent" v-if="iconString">
     <div
       class="flex items-center justify-center rounded-full cursor-pointer w-10 h-10"
       :class="[hoverColor]"

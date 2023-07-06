@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import { v4 as uuidv4 } from  'uuid';
-import { collection, doc, setDoc, query, where, onSnapshot, deleteDoc, getDoc } from "firebase/firestore";
+import { collection, doc, setDoc, query, where, onSnapshot, deleteDoc, getDoc, orderBy } from "firebase/firestore";
 import moment from 'moment';
 
 import { db } from "../firebase-init";
@@ -23,7 +23,8 @@ export const useUserStore = defineStore("user", {
     getEmailByEmailAddress() {
       const q = query(
         collection(db, "emails"),
-        where("toEmail", "==", this.email)
+        where("toEmail", "==", this.email),
+        orderBy('createdAt', 'desc')
       );
 
       onSnapshot(q, (querySnapshot) => {
@@ -94,6 +95,17 @@ export const useUserStore = defineStore("user", {
       }
     },
 
+    // has email viewed or not
+    async emailHasBeenViewed(id) {
+      try {
+        await setDoc(doc(db, "emails/" + id), {
+          hasViewed: true
+        }, { merge: true })
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
     // delete a email
     async deleteEmail(id) {
       try {
@@ -122,6 +134,7 @@ export const useUserStore = defineStore("user", {
       this.email = null;
       this.firstName = null;
       this.lastName = null;
+      this.email= [];
     },
   },
   persist: true,

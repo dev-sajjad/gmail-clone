@@ -7,7 +7,7 @@
           <IconComponent
             iconString="back"
             iconColor="#636363"
-            iconSize="22"
+            :iconSize= "22"
             hoverColor="hover:bg-gray-300"
             text="Back to inbox"
           />
@@ -17,7 +17,7 @@
             class="ml-3"
             iconString="trash"
             iconColor="#636363"
-            iconSize="22"
+            :iconSize= "22"
             hoverColor="hover:bg-gray-300"
             text="Delete"
           />
@@ -61,6 +61,8 @@ let email = ref({})
 
 onMounted(async() => {
   const res = await userStore.getEmailById(route.params.id)
+
+  await userStore.emailHasBeenViewed(res.id)
 
   email.value = {
     id: res.id,

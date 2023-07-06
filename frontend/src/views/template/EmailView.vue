@@ -6,7 +6,7 @@
         <IconComponent
           iconString="menu"
           iconColor="#636363"
-          iconSize="22"
+          :iconSize="22"
           hoverColor="hover:bg-gray-200"
           text="Main menu"
           class="-ml-2 mr-2"
@@ -22,7 +22,7 @@
           <IconComponent
             iconString="magnify"
             iconColor="#636363"
-            iconSize="22"
+            :iconSize="22"
             hoverColor="hover:bg-gray-300"
             text="Search"
           />
@@ -34,7 +34,7 @@
           <IconComponent
             iconString="tune"
             iconColor="#636363"
-            iconSize="22"
+            :iconSize="22"
             hoverColor="hover:bg-gray-300"
             text="Show search options"
           />
@@ -45,14 +45,14 @@
           <IconComponent
             iconString="cog"
             iconColor="#636363"
-            iconSize="22"
+            :iconSize="22"
             hoverColor="hover:bg-gray-200"
             text="Settings"
           />
           <IconComponent
             iconString="apps"
             iconColor="#636363"
-            iconSize="22"
+            :iconSize="22"
             hoverColor="hover:bg-gray-200"
             text="Google apps"
           />
@@ -116,7 +116,11 @@
       </div>
 
       <!-- this is where the page changes -->
-      <RouterView />
+      <RouterView v-slot="{ Component}">
+        <Transition name="fade" mode="out-in">
+          <component :is="Component"/>
+        </Transition>
+      </RouterView>
       <!-- this is where the page changes -->
 
       <!-- left side bar -->
@@ -259,3 +263,16 @@ const sendEmail = async () => {
 }
 
 </script>
+
+
+<style >
+.fade-enter-from, 
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-out;
+}
+</style>
